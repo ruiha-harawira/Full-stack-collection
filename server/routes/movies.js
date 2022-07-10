@@ -1,15 +1,27 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../db/dbFuncs/movies') //pathway to db funcs
 
-const db = require('../db/db')
+
 router.get('/', (req, res) => {
-  db.getMovies()
-    .then((movies) => {
-      res.json(movies)
+  db.getAllMovies()
+    .then((allMovies) => res.json(allMovies)) 
+    .catch((err) => res.status(500).send(err.message))
     })
-    .catch((err) => {
-      res.status(500).send(err.message)
-    })
-})
+
+
+
+// router.get('/movie/:id', (req, res) => {
+//   const id = Number(req.params.id)
+//   return db
+//     .getMovieById(id)
+//     .then((movie) => {
+//       res.status(200).json({ id: movie  })
+//     })
+//     .catch((err) => {
+//       res.status(500).json({ error: err.message })
+//     })
+// })
+
 
 module.exports = router
