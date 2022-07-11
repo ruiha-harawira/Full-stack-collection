@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react'
-import MovieList from './MovieList'
-import {getAllTheMovies} from '../actions/movies'
 import { useDispatch } from 'react-redux'
+import { Routes, Route } from 'react-router-dom'
+
+import MovieList from './MovieList'
+import AddForm from './AddForm'
+
+import {getAllTheMovies} from '../actions/movies'
+
+
+
 
 
 
@@ -17,9 +24,6 @@ useEffect(() => {
 
 }, [])
 
-
-
-
   return (
     <>
       <header className="header">
@@ -27,6 +31,13 @@ useEffect(() => {
       </header>
       <section className="main">
       <MovieList />
+      <AddForm />
+
+      <Routes>
+        <Route path='/' element={<MovieList />} />
+        <Route path ='/add' element={<AddForm />} />
+      </Routes>
+      
       </section>
     </>
   )
