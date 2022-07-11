@@ -8,7 +8,7 @@ function MovieList () {
 
   return (
   <>
-  <h2>Mooovie List</h2>
+  <h2>Movie List</h2>
   <div className='movie__container'>
   {movies.map(movie => <MovieTile banana={movie} key={movie.id} />)}
   </div>

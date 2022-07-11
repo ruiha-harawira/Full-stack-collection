@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import MovieList from './MovieList'
 import AddForm from './AddForm'
+import Nav from './Nav'
 
 import {getAllTheMovies} from '../actions/movies'
 
@@ -25,19 +26,19 @@ useEffect(() => {
 }, [])
 
   return (
-    <>
+    <> 
+    <Nav />
       <header className="header">
-        <h1>Moooovies</h1>
+        <h1>Movies</h1>
       </header>
       <section className="main">
-      <MovieList />
-      <AddForm />
-
+    
+     <>
       <Routes>
         <Route path='/' element={<MovieList />} />
         <Route path ='/add' element={<AddForm />} />
       </Routes>
-      
+      </>
       </section>
     </>
   )
