@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { searchForMovie } from '../apis/imdb'
+import { addMovie } from '../actions/movies'
 
 
 function AddForm () { 
+const dispatch = useDispatch()
+
 const [newMovie, setNewMovie] = useState('')
 const [results, setResults] = useState([])
 
@@ -20,6 +25,12 @@ const handleSubmit = (evt) => {
 
 
 }
+// calling a thunk to add movies 
+//dispactch add movie thunk 
+const handleAdd = (movie) => {
+
+dispatch (addMovie(movie))
+}
 
 return (
   <>
@@ -27,15 +38,20 @@ return (
    
       <div className="search">
       <label>
-        Search:
-        <input onChange={handleTyping} name='welcome' value={newMovie} type='text'/>
+        Search movies :
+        <input onChange={handleTyping} name='welcome' value={newMovie} type='text'/> 
+      
+      <button>Done!</button>
       </label>
       </div>
-      <br></br>
-      <button>Done!</button>
+  
     </form>
     <ul>
-      {results.map(movie => <li>{movie.title} {movie.description}</li>)}
+      {results.map(movie => (
+      <li key={movie.id}>
+        {movie.title} {movie.description} <button onClick={() => handleAdd(movie)}>Add</button>
+      </li>
+      ))}
     </ul>
   </>
 )
