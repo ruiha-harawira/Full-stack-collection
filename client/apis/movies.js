@@ -16,3 +16,11 @@ export function postTheMovie(messyMovie) {
   .send(tidyMovie) 
   .then((res) => res.body)
 }
+
+export function updateMovieDetails(id, details) {
+ return request.patch('/api/v1/movies/' + id) 
+  .send(details)
+  .then(resp => resp.body)
+  // send details 
+
+}

@@ -1,8 +1,13 @@
-import { fetchAllMovies, postTheMovie } from '../apis/movies'
+import {
+  fetchAllMovies,
+  postTheMovie,
+  updateMovieDetails,
+} from '../apis/movies'
 
 // type vars
 const SAVE_ALL_MOVIES = 'SAVE_ALL_MOVIES'
 const SAVE_ONE_MOVIE = 'SAVE_ONE_MOVIE'
+const UPDATE_ONE_MOVIE = 'UPDATE_ONE_MOVIE'
 
 // action creator stuff
 function saveMovies(arr) {
@@ -11,10 +16,17 @@ function saveMovies(arr) {
     payload: arr,
   }
 }
-function saveOneMovie (newMovie) {
+function saveOneMovie(newMovie) {
+  return {
+    type: SAVE_ONE_MOVIE,
+    payload: newMovie,
+  }
+}
+
+function updateOneMovie (movie) {
 return {
-  type: SAVE_ONE_MOVIE,
-  payload: newMovie,
+  type: UPDATE_ONE_MOVIE,
+  payload: movie
 }
 }
 // thunk
@@ -42,5 +54,16 @@ export function addMovie(movie) {
         dispatch(saveOneMovie(movieDetails))
       })
       .catch((err) => console.log(err.message))
+  }
+}
+
+export function setAsWatched(id) {
+  return (dispatch) => {
+    updateMovieDetails(id, { watched: true })
+    .then((updatedMovie) => {
+      console.log(updatedMovie)
+      dispatch(updateOneMovie(updatedMovie))
+    })
+    .catch((err) => console.log(err.message))
   }
 }

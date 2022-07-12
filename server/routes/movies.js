@@ -1,4 +1,5 @@
 const express = require('express')
+const res = require('express/lib/response')
 const router = express.Router()
 const db = require('../db/dbFuncs/movies') //pathway to db funcs
 
@@ -20,18 +21,16 @@ router.post('/', (req, res) => {
       res.json(theWholeMovieObj)
     })
     .catch((err) => res.status(500).send(err.message))
-}) 
+})
 
-// router.get('/movie/:id', (req, res) => {
-//   const id = Number(req.params.id)
-//   return db
-//     .getMovieById(id)
-//     .then((movie) => {
-//       res.status(200).json({ id: movie  })
-//     })
-//     .catch((err) => {
-//       res.status(500).json({ error: err.message })
-//     })
-// })
+router.patch('/:id', (req, res) => {
+  const id = req.params.id
+  const detailsToUpdate = req.body
+
+  db.updateMovie(id, detailsToUpdate)
+    .then(() => db.getMovieById(id))
+    .then((movie) => res.json(movie))
+    .catch((err) => res.status(500).send(err.message))
+})
 
 module.exports = router

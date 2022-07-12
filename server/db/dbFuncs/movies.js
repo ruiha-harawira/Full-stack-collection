@@ -21,8 +21,17 @@ function insertTheMovie (newMovie, db = conn) {
 
 }
 
+function updateMovie (id, details, db = conn) {
+  return db('movies')
+  .where('id', id)
+  .update(details) // { watched: true}
+}
+
+// when doing an update pass the name of field, and update value
+
 module.exports = {
   getAllMovies,
   getMovieById,
-  insertTheMovie
+  insertTheMovie,
+  updateMovie
 }
