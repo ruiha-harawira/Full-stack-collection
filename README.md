@@ -1,6 +1,4 @@
-# Fullstack Code Along
-
-This repo is designed to provide a base for the code along during a week 8 breakout lecture, though it is unlikely we will complete all of it in the breakout. It contains node modules and folders for databases, routes, api requests, react components, and redux actions and creators, but these need to be written as none have yet been written.
+# Fullstack 
 
 ## In this readme
 
